@@ -154,9 +154,9 @@ def run_training():
                 loss += loss_fun(pre , y)
                 if index == 0:
                     _, pre = torch.max(pre, dim=1)
-                    print('prediction', pre.data.tolist()) # the following  three line can print the output and the prediction
-                    print('b_y       ', y.data.tolist())   # And you need to take a screenshot and then past is to your homework paper.
-                    print('*' * 30)
+                    # print('prediction', pre.data.tolist()) # the following  three line can print the output and the prediction
+                    # print('b_y       ', y.data.tolist())   # And you need to take a screenshot and then past is to your homework paper.
+                    # print('*' * 30)
             loss  = loss  / BATCH_SIZE
             print("epoch  ",epoch,'batch number',batch,"loss is: ", loss.data.tolist())
             optimizer.zero_grad()
@@ -166,7 +166,7 @@ def run_training():
 
             if batch % 20 ==0:
                 torch.save(rnn_model.state_dict(), './poem_generator_rnn')
-                print("finish  save model")
+                # print("finish  save model")
 
 
 
@@ -187,7 +187,7 @@ def pretty_print_poem(poem):  # 令打印的结果更工整
         shige.append(w)
     poem_sentences = poem.split('。')
     for s in poem_sentences:
-        if s != '' and len(s) > 10:
+        if s != '' and len(s) > 2:
             print(s + '。')
 
 
@@ -214,11 +214,12 @@ def gen_poem(begin_word):
         # print(poem)
         if len(poem) > 30:
             break
+    # print("Begin: ", begin_word, " ", poem)
     return poem
 
 
 
-# run_training()  # 如果不是训练阶段 ，请注销这一行 。 网络训练时间很长。
+run_training()  # 如果不是训练阶段 ，请注销这一行 。 网络训练时间很长。
 
 
 pretty_print_poem(gen_poem("日"))
